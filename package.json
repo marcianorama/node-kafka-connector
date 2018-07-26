@@ -1,0 +1,42 @@
+{
+  "name": "node-kafka-connector",
+  "version": "1.0.0",
+  "description": "This app connects to kafka and produces messages to kafka topic",
+  "main": "index.js",
+  "scripts": {
+    "init": "npm install && npm install -g rimraf && mkdir logs | md logs",
+    "start:before": "rimraf logs &&  mkdir logs | md logs",
+    "start": "nodemon ./src/index.js --watch src --exec babel-node | pino-tee info ./logs/info-logs.log error ./logs/error-logs.log > ./logs/all-logs.log",
+    "build": "./node_modules/.bin/babel ./src -d dist --presets env,stage-3 --ignore ./src/_test/*.spec.js,./node_modules",
+    "serve": "node ./dist/index.js",
+    "clean": "rimraf ./dist",
+    "slate": "rimraf node_modules && npm install",
+    "lint": "eslint src",
+    "lint:fix": "eslint ./src --fix"
+  },
+  "keywords": [
+    "node",
+    "kafka",
+    "express"
+  ],
+  "author": "Siddharth Kar",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-pino-logger": "^3.0.2",
+    "pino": "^4.17.5",
+    "pino-tee": "^0.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "nodemon": "^1.18.3"
+  }
+}
