@@ -1,10 +1,7 @@
 import Express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import { logger, expressLogger } from './config';
-
-// initialize dotenv variables
-dotenv.config();
+import { logger, expressLogger, kafkaHighLevelProducer } from './config';
 
 // initialize express
 const app = Express();

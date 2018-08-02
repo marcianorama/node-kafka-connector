@@ -29,7 +29,8 @@
     "express-pino-logger": "^3.0.2",
     "kafka-node": "^2.6.1",
     "pino": "^4.17.5",
-    "pino-tee": "^0.2.2"
+    "pino-tee": "^0.2.2",
+    "properties": "^1.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
