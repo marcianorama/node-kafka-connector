@@ -1,7 +1,6 @@
 import Express from 'express';
-import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import { logger, expressLogger, kafkaHighLevelProducer } from './config';
+import { logger, expressLogger } from './config';
 
 // initialize express
 const app = Express();
@@ -11,7 +10,6 @@ app.use(expressLogger);
 
 // adding body parser middlewaree to express
 app.use(bodyParser.json({ limit: '2mb' }));
-app.use(bodyParser.urlencoded({ limit: '2mb', extended: 'false' }));
 
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -22,5 +20,5 @@ app.get('/', (req, res) => {
 
 // starting the server
 app.listen(process.env.APP_PORT, () => {
-    logger.info(`Server listening at http://${process.env.APP_HOST}:${process.env.APP_PORT}/`);
+    logger.info({ message: `Server listening at http://${process.env.APP_HOST}:${process.env.APP_PORT}/` });
 });

@@ -12,7 +12,7 @@ const getConfig = (configName) => {
     return configProps;
 };
 
-const getKafkaConfigOptions = () => {
+const getKafkaClientOptions = () => {
     let kafkaOptions;
     if (getConfig('kafka')) {
         kafkaOptions = { ...getConfig('kafka'), kafkaHost: process.env.KAFKA_BROKER_LIST };
@@ -41,7 +41,7 @@ const getKafkaProducerOptions = () => {
 
 const ConfigUtil = {
     getConfig,
-    getKafkaConfigOptions,
+    getKafkaClientOptions,
     getKafkaProducerOptions,
 };
 
