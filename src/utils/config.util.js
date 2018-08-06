@@ -13,15 +13,18 @@ const getConfig = (configName) => {
 };
 
 const getKafkaClientOptions = () => {
-    let kafkaOptions;
-    if (getConfig('kafka')) {
-        kafkaOptions = { ...getConfig('kafka'), kafkaHost: process.env.KAFKA_BROKER_LIST };
+    const kafkaOptions = {
+        connectionString: process.env.KAFKA_CONNECTIONS_STRING,
+        clientId: getConfig('kafka.clientId'),
+    };
+    if (getConfig('zkOptions')) {
+        kafkaOptions.zkOptions = getConfig('zkOptions');
     }
-    if (getConfig('kafkaConnectRetry')) {
-        kafkaOptions.connectRetryOptions = getConfig('kafkaConnectRetry');
+    if (getConfig('noAckBatchOptions')) {
+        kafkaOptions.noAckBatchOptions = getConfig('noAckBatchOptions');
     }
-    if (getConfig('kafkaSSL')) {
-        const kafkaSSL = getConfig('kafkaSSL');
+    if (getConfig('sslOptions')) {
+        const kafkaSSL = getConfig('sslOptions');
         if (kafkaSSL.rejectUnauthorized) {
             kafkaSSL.pfx = fs.readFileSync(process.env.KAFKA_SSLOPTIONS_PFX);
             kafkaSSL.passphrase = process.env.KAFKA_SSLOPTIONS_PASSPHRASE;
